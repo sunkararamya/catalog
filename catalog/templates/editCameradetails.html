@@ -1,0 +1,58 @@
+{% include 'navigation_bar.html' %}
+<div class="main">
+{% block content %}
+
+<div class="">
+		<div class="mr-sm-2 mb-2 col-sm-8" style="margin: 10px;">
+			<form action="{{ url_for('editCameradetails',fctid=fctid,fctename=
+			cameraDetails.r_name)}}" method="POST">
+				<div class="panel panel-info">
+				  <div class="panel-heading">Edit filmy camera details</div>
+				  <div class="panel-body">
+				  	
+					  <div class="form-group">
+					  	<label class="text-primary" for="r_name">Enter Camera name:</label>
+					    <input type="name" class="form-control" name="r_name" value="{{cameraDetails.r_name}}">
+					  </div>
+					  
+					  <div class="form-group">
+					  	<label class="text-primary" for="Model">Enter Camera Model:</label>
+					    <input type="text" class="form-control" name="cam_Model" value="{{cameraDetails.cam_Model}}">
+					  </div>
+					  <div class="text-primary" class="form-group">
+					  	<label for="dimension">Enter Camera dimension:</label>
+					    <input type="text" class="form-control" name="Dimension" value="{{cameraDetails.Dimension}}">
+					  </div>
+					  <div class="form-group">
+					  	<label class="text-primary" for="batteries">Enter Type of batteries can be used:</label>
+					    <input type="text" class="form-control" name="Batteries" value="{{cameraDetails.Batteries}}">
+					  </div>
+
+					  
+					  <div class="form-group">
+					  	<label class="text-primary" for="resolution">Enter Camera resolution:</label>
+					    <input type="text" class="form-control" name="resolution" value="{{cameraDetails.resolution}}">
+					  </div>
+					  <div class="form-group">
+					  	<label class="text-primary" for="screen_size">Enter screen size of the camera:</label>
+					    <input type="text" class="form-control" name="screen_size" value="{{cameraDetails.screen_size}}">
+					  </div>
+                    <div class="form-group">
+					  	<label class="text-primary" for="conector_type">Enter Connector type Camera supports:</label>
+					    <input type="text" class="form-control" name="conector_type" value="{{cameraDetails.conector_type}}">
+					  </div>
+                    <div class="form-group">
+					  	<label class="text-primary" for="camera_cost">Enter Cost of Camera:</label><br>
+					    <input type="text" class="camera_cost" name="camera_cost" value="{{cameraDetails.camera_cost}}">
+					  </div>
+                    <div class="form-group">
+					  	<label class="text-primary" for="voltage">Enter voltage of the Camera:</label>
+					    <input type="text" class="form-control" name="voltage" value="{{cameraDetails.voltage}}">
+					  </div>							  
+				  </div> 
+				  <div class="panel-footer text-center"><input type="submit" class="btn btn-primary" value="EDIT"></div>
+				</div>
+				</form>
+			</div>
+</div>
+{% endblock content %}

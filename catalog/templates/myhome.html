@@ -1,0 +1,46 @@
+{% include 'navigation_bar.html' %}
+<div class="main">
+{% block content %}
+  <!-- {% for fct in fct_tcs %}
+    <a href="{{ url_for('displayCameras',fctid=fct.r_id)}}">{{fct.r_name}}</a><br>
+    {% endfor %} -->
+    {% with messages = get_flashed_messages() %}
+	    {% if messages %}
+	        <div class="alert alert-success alert-dismissable animated fadeIn">
+	            {% for message in messages %}
+	            <a href="#" class="close" data-dismiss="alert" aria-name="close">×</a>
+	            <p class="h3"><strong>{{ message }}</strong></p>
+	            {% endfor %}
+	        </div>
+	    {% endif %}
+	{% endwith %}
+
+	<div class="text-center">
+		<!-- <h1>Welcome to the film camera hub</h1> -->
+	
+  <img class="mycams" src="https://img.fotocommunity.com/canon-ae1-2efa4023-b8bd-4765-beb4-5d0a5306fac8.jpg?width=1000.jpg" style="width:100%">
+  <img class="mycams" src="https://www.popphoto.com/sites/popphoto.com/files/styles/1000_1x_/public/import/2011/files/_images/201105/fujifilmga45.jpg?itok=VhSab_YZ.jpg" style="width:100%">
+  <img class="mycams" src="https://cdn.shopclues.com/images/thumbnails/19867/320/320/camera1434453523.jpg" style="width:100%">
+</div>
+<script>
+var myIndex = 0;
+carousel();
+
+function carousel() {
+  var i;
+  var x = document.getElementsByClassName("mycams");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";  
+  }
+  myIndex++;
+  if (myIndex > x.length) {myIndex = 1}    
+  x[myIndex-1].style.display = "block";  
+  setTimeout(carousel, 2500);    
+}
+</script>
+
+	</div>
+
+    
+{% endblock content %}
+</div>

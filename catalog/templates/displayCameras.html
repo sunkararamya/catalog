@@ -1,0 +1,59 @@
+{% include 'navigation_bar.html' %}
+<div class="main">
+{% block content %}
+{% with messages = get_flashed_messages() %}
+	{% if messages %}
+	        <div class="alert alert-success alert-dismissable animated fadeIn">
+	            {% for message in messages %}
+	            <a href="#" class="close" data-dismiss="alert" aria-name="close">×</a>
+	            <p class="h4"><strong>{{ message }}</strong></p>
+	            {% endfor %}
+	        </div>
+	{% endif %}	    
+{% endwith %}
+{% if 'username' in session %}
+<button type="button" class="btn btn-warning" style="margin: 5px 0px 5px 25px;"><a href="{{url_for('addCameraDetails',fctname=fcts.r_name)}}" style="text-decoration: none;"><strong>Add New Film Camera</strong></a></button>
+
+{% endif %}
+<div class="row" style="margin: 10px;">
+{% for fctk in fctes %}
+
+	<div class="col-sm-4 text-center">
+		<div class="panel panel-primary">
+			<div class="panel-heading" style="background-color:#FF69B4">
+				<h4>{{ fctk.r_name }}</h4>
+			</div>
+			<div class="panel-body text-center">
+				<table>
+				    
+					<tr><th>CAMERA MODEL</th><td>:</td><td><h5>
+					{{ fctk.cam_Model }}</h5></td></tr>
+					<tr><th>DIMENSION</th><td>:</td><td><h5>
+					{{ fctk.Dimension }}</h5></td></tr>
+					<tr><th>BATTERIES</th><td>:</td><td><h5>
+					{{ fctk.Batteries }}</h5></td></tr>
+					<tr><th>RESOLUTION</th><td>:</td><td><h5>
+					{{ fctk.resolution }}</h5></td></tr>
+					<tr><th>SCREEN_SIZE</th><td>:</td><td><h5>{{fctk.screen_size}}</h5></td></tr>
+					<tr><th>CONNECTOR_TYPE</th><td>:</td><td><h5>
+					{{ fctk.conector_type}}</h5></td></tr>
+					<tr><th>CAMERA_COST</th><td>:</td><td><h5>
+					{{ fctk.camera_cost }}</h5></td></tr>
+					<tr><th>VOLTAGE</th><td>:</td><td><h5>{{ fctk.voltage }}</h5></td></tr>
+				</table>
+			</div>
+			{% if 'username' in session %}
+			<div class="panel-footer" >
+					<button type="button" class="btn btn-info"><a href="{{ url_for('editCameradetails',fctid=fcts.r_id,fctename=
+					fctk.r_name) }}"style="text-decoration: none;color:#1A543D;">EDIT</a></button>
+					<button type="button" class="btn btn-danger"><a href="{{ url_for('deleteCameradetails',fctid=fcts.r_id,fctename=
+					fctk.r_name)}}"style="text-decoration:underline;text-decoration-color:#00FFFF	;color:#831524;">DELETE</a></button>
+			</div>
+			{% endif %}	
+			
+		</div>
+	</div>
+{% endfor %}
+</div>
+{% endblock content %}
+</div>

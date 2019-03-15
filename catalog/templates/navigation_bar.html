@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title> FILM CAMERA STORE</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="//apis.google.com/js/platform.js?onload=start"> </script>
+  <!-- END PRE-REQUISITES FOR SIGN IN TO GOOGLE ACCOUNT-->
+  <style>
+    body {
+      font-family: "Lato", sans-serif;
+	  background-color:#008080;
+    }
+
+    .sidenav {
+      height:91%;
+      width: 310px;
+      position: fixed;
+      z-index: 1;
+      top: 50px;
+      left: 0;
+      background-color:#B7A651;
+      overflow-x: hidden;
+      padding-top: 30px;
+	  border-color:red;
+	  border-radius:43px;
+    }
+
+    .sidenav a {
+      padding: 6px 6px 6px 32px;
+      text-decoration: none;
+      font-size: 16px;
+      color: #00008B;
+      display: block;
+    }
+
+    .sidenav a:hover {
+      color: #EEE8AA;
+	  font-size:19px;
+    }
+
+    .main {
+      margin-left:299px; /* Equal to the width of sidenav */
+
+    }
+	#me{
+	background-color:red;
+	}
+	#anc{
+	color:#2E8B57;
+	}
+	#anc :hover{
+	color:#B0E0E6;
+	}
+	.signin{
+	color:#E6E6FA;
+	}
+	.my{
+	color:#2E8B57;
+	}
+	
+	    @media screen and (max-height: 500px) {
+      .sidenav {padding-top: 15px;}
+      .sidenav a {font-size: 18px;}
+    }
+  </style>
+  {% block head %}{% endblock head %}
+</head>
+<body style='color:#8B4513'>
+{% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <script>
+            var messages = {{ messages | safe }};
+            for (var i=0; i<messages.length; i++) {
+              alert(messages[i]);
+            }
+          </script>
+        {% endif %}
+{% endwith %}
+<nav class="navbar navbar-inverse  navbar-fixed-top" id='me'style='color:green'>
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="{{ url_for('home') }}"><p id='anc'><b>FILM CAMERA HUB<b> </p></a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      {% if 'username' in session %}
+            <li><button class="btn btn-warning mr-sm-2" style="margin-top: 6px;background-color:#FFD700;"><a href="{{ url_for('addCameraType')}}">Add Film Camera  </a></button></li>
+            <li style="margin: 10px;"><p class="text-primary mr-sm-2">{{ session.username }}</p></li>
+			
+            <li><a href="{{ url_for('logout')}}"><span class="glyphicon glyphicon-log-in"></span> SIGNOUT</a></li>
+      {% else %}
+            <li><a id='my' href="{{ url_for('displaysignin')}}"><span class="glyphicon glyphicon-log-in"></span>SIGNIN</p>
+			</a></li>
+      {% endif %}
+      
+    </ul>
+  </div>
+</nav>
+  
+<div class="sidenav">
+  <table>
+      {% for fct in fct_tcs %}
+      <tr>
+          <td><a href="{{ url_for('displayCameras',fctid=fct.r_id)}}">{{fct.r_name}}</a></td>
+          {% if 'username' in session %}
+            <td><a href = "{{ url_for('editCameraCategory',fctid=fct.r_id)}}">
+            <span class="glyphicon glyphicon-pencil pull-right " data-toggle="tooltip" title="Edit Category" data-placement="bottom"> </span> </a></td>
+            <td><a href = "{{ url_for('deleteCameraCategory',fctid=fct.r_id)}}">
+            <span class="glyphicon glyphicon-trash pull-right" data-toggle="tooltip" title="Delete Category" data-placement="top"> </span> </a></td>  
+          {% endif %}   
+        </tr>              
+      {% endfor %}
+  </table>
+</div>
+<div class="container">
+
+      <div class="main" style="margin-top: 100px;">
+        
+            {% block content %}
+              
+            {% endblock content %}
+          
+        </div>
+  </div>
+  
+</body>
+</html>
